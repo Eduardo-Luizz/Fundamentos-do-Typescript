@@ -1,0 +1,2 @@
+É possível abrir as config do typescript e mudar as config
+Exemplo tirar o sublinhado do tipo any
