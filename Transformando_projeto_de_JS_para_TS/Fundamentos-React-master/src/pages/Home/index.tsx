@@ -2,11 +2,21 @@ import './style.css'
 import { Card, CardProps } from '../../components/Card'
 import React, { useState, useEffect } from 'react'; // Isso é hook, comeca com use, hook sao funcoes que permite conectar os recursos de estado e ciclo de vida do react apartir de componentes
 
+type APIResponse = {
+  name: string;
+  avatar_url: string;
+}
+
+type User = {
+  name: string;
+  avatar: string;
+}
+
 export function Home() {
 
   const [studentName, setStudentName] = useState('Seu nome ...'); // Primeira posicao o estado e o segundo a funcao que atualiza esse estado
   const [students, setStudents] = useState<CardProps[]>([]);
-  const [user, setUser] = useState({ name: '', avatar: '' })
+  const [user, setUser] = useState<User>({} as User);
 
   function handleAddStudent() {
     const newStudent = {
@@ -22,29 +32,29 @@ export function Home() {
 
   useEffect(() => {
 
-    /* useEffect async
+    /* useEffect async */
     async function fetchData() {
       const response = await fetch('https://api.github.com/users/Eduardo-Luizz')
-      const data = await response.json(); 
+      const data = await response.json() as APIResponse; 
         setUser({
         name: data.name,
         avatar: data.avatar_url
       })
       fetchData();
     }
-    */
+    
 
     // Corpo do useEffect
-    fetch('https://api.github.com/users/Eduardo-Luizz')
-    .then((response) => response.json())
-    .then(data => {
-      setUser({
-        name: data.name,
-        avatar: data.avatar_url
-      })
-    })
-    .catch((error) => console.log(error))
-  },[]); // [estados que o useEffect depende]
+  //   fetch('https://api.github.com/users/Eduardo-Luizz')
+  //   .then((response) => response.json())
+  //   .then(data => {
+  //     setUser({
+  //       name: data.name,
+  //       avatar: data.avatar_url
+  //     })
+  //   })
+  //   .catch((error) => console.log(error))
+   },[]); // [estados que o useEffect depende]
 
   return (
     <div className="container">
