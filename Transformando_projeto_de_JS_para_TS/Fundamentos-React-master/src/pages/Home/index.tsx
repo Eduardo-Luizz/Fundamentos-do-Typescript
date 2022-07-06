@@ -1,11 +1,11 @@
 import './style.css'
-import { Card } from '../../components/card'
+import { Card, CardProps } from '../../components/Card'
 import React, { useState, useEffect } from 'react'; // Isso é hook, comeca com use, hook sao funcoes que permite conectar os recursos de estado e ciclo de vida do react apartir de componentes
 
 export function Home() {
 
   const [studentName, setStudentName] = useState('Seu nome ...'); // Primeira posicao o estado e o segundo a funcao que atualiza esse estado
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState<CardProps[]>([]);
   const [user, setUser] = useState({ name: '', avatar: '' })
 
   function handleAddStudent() {
@@ -70,8 +70,8 @@ export function Home() {
       <Card
         key={student.time}
         name={student.name} 
-        time={student.time}>
-      </Card>
+        time={student.time}
+      />
       ))
     }
     </div>
